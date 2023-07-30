@@ -3960,7 +3960,7 @@
         insert(target, button, anchor);
 
         if (!mounted) {
-          dispose = listen(button, "click", /*click_handler_1*/ ctx[8]);
+          dispose = listen(button, "click", /*click_handler_1*/ ctx[9]);
           mounted = true;
         }
       },
@@ -3989,7 +3989,7 @@
         insert(target, button, anchor);
 
         if (!mounted) {
-          dispose = listen(button, "click", /*click_handler*/ ctx[7]);
+          dispose = listen(button, "click", /*click_handler*/ ctx[8]);
           mounted = true;
         }
       },
@@ -4105,7 +4105,7 @@
         current = true;
 
         if (!mounted) {
-          dispose = listen(button, "click", /*click_handler_2*/ ctx[9]);
+          dispose = listen(button, "click", /*click_handler_2*/ ctx[10]);
           mounted = true;
         }
       },
@@ -4195,7 +4195,7 @@
   }
 
   function instance($$self, $$props, $$invalidate) {
-    let apikey = window.aisplainapikey;
+    let { apikey } = $$props;
     let isMenuVisible = false;
     let isRecording = false;
     let isResponseAvailable = false;
@@ -4276,6 +4276,10 @@
 
     const click_handler_2 = () => $$invalidate(0, isMenuVisible = !isMenuVisible);
 
+    $$self.$$set = $$props => {
+      if ('apikey' in $$props) $$invalidate(7, apikey = $$props.apikey);
+    };
+
     return [
       isMenuVisible,
       isRecording,
@@ -4284,6 +4288,7 @@
       mediaRecorder,
       response,
       playIntro,
+      apikey,
       click_handler,
       click_handler_1,
       click_handler_2
@@ -4293,7 +4298,7 @@
   class Embed extends SvelteComponent {
     constructor(options) {
       super();
-      init(this, options, instance, create_fragment, safe_not_equal, {}, add_css);
+      init(this, options, instance, create_fragment, safe_not_equal, { apikey: 7 }, add_css);
     }
   }
 
@@ -4303,8 +4308,7 @@
   // Get the 'name' attribute from the script tag We can pass things like API keys
   const apikey = script.getAttribute("apikey");
 
-  const div = document.findElementById("aisplain");
-  window.aisplainapikey = apikey; 
+  const div = document.createElement("div");
   document.body.appendChild(div);
 
   new Embed({
