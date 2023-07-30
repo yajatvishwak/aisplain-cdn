@@ -4309,7 +4309,7 @@
     const apikey = script.getAttribute("apikey");
 
     const div = document.createElement("div");
-    script.parentNode.insertBefore(div, script);
+    document.body.appendChild(div);
 
     new Embed({
       target: div,
